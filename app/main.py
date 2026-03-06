@@ -24,10 +24,10 @@ def shop_trip() -> None:
             location_of_customer = customer.location
 
             for shop in shops:
-                fuel_cost = customer.get_fuel_cost(shop.location, fuel_price)
                 products_cost = shop.get_products_cost(customer.product_cart)
+                fuel_cost = customer.get_fuel_cost(shop.location, fuel_price)
 
-                current_trip_cost = fuel_cost + products_cost
+                current_trip_cost = products_cost + fuel_cost
 
                 print(f"{customer.name}'s trip to the {shop.name}"
                       f" costs {current_trip_cost:.2f}")
@@ -35,12 +35,12 @@ def shop_trip() -> None:
                 if current_trip_cost < min_trip_cost:
                     min_trip_cost = current_trip_cost
                     best_shop = shop
+                    cheapest_products_cost = products_cost
 
             if best_shop and customer.money >= min_trip_cost:
                 print(f"{customer.name} rides to {best_shop.name}\n")
 
-                prod_cost = best_shop.get_products_cost(customer.product_cart)
-                best_shop.print_receipt(customer, prod_cost)
+                best_shop.print_receipt(customer, cheapest_products_cost)
 
                 print(f"{customer.name} rides home")
                 customer.money -= min_trip_cost

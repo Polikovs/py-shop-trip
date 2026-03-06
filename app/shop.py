@@ -1,3 +1,5 @@
+import datetime
+
 from app.customer import Customer
 
 
@@ -11,7 +13,7 @@ class Shop:
         return sum(count * self.products[item] for item, count in cart.items())
 
     def print_receipt(self, customer: Customer, total_cost: float) -> None:
-        print("Date: 04/01/2021 12:33:41")
+        print(f"Date: {datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")}")
         print(f"Thanks, {customer.name}, for your purchase!")
         print("You have bought:")
         for product_name, count in customer.product_cart.items():
