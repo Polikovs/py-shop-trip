@@ -39,6 +39,7 @@ def shop_trip() -> None:
 
             if best_shop and customer.money >= min_trip_cost:
                 print(f"{customer.name} rides to {best_shop.name}\n")
+                customer.location = best_shop.location
 
                 best_shop.print_receipt(customer, cheapest_products_cost)
 
